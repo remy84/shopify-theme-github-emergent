@@ -1,76 +1,69 @@
 <!doctype html>
 <html class="no-js" lang="{{ request.locale.iso_code }}">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="#0B0B0B">
-    <link rel="canonical" href="{{ canonical_url }}">
-    
-    <title>
-      {{ page_title }}
-      {%- unless page_title contains 'We Have Faith' %} &ndash; We Have Faith{% endunless -%}
-    </title>
-    
-    {% if page_description %}
-      <meta name="description" content="{{ page_description | escape }}">
-    {% endif %}
-    
-    {{ content_for_header }}
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    {{ 'we-have-faith.css' | asset_url | stylesheet_tag }}
-  </head>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0B0B0B">
+  <link rel="canonical" href="{{ canonical_url }}">
+  
+  <title>{{ page_title }}{% unless page_title contains shop.name %} - {{ shop.name }}{% endunless %}</title>
+  
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
 
-  <body class="template-{{ template.name }}">
-    <!-- Header -->
-    <header class="site-header">
-      <div style="max-width: 1400px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 70px;">
-        <a href="{{ routes.root_url }}" style="font-family: Montserrat, sans-serif; font-size: 1.5rem; font-weight: 600; color: white; text-decoration: none;">
-          We Have Faith
+  {{ content_for_header }}
+
+  <!-- Charger le CSS principal -->
+  {{ 'we-have-faith.css' | asset_url | stylesheet_tag }}
+</head>
+
+<body class="template-{{ template.name }}">
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="{{ routes.root_url }}" class="logo">
+          <img src="https://customer-assets.emergentagent.com/job_wehave-faith/artifacts/2mrqhg65_LOGO%20WHF%20BLANC.png" alt="{{ shop.name }}" />
+          <span>WE HAVE FAITH</span>
         </a>
-        
-        <nav style="display: flex; align-items: center; gap: 2rem;">
-          <a href="{{ routes.root_url }}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">Accueil</a>
-          <a href="/collections/homme" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">Homme</a>
-          <a href="/collections/femme" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">Femme</a>
-          <a href="/collections/accessoires" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">Accessoires</a>
+        <nav>
+          <ul class="nav">
+            <li><a href="{{ routes.root_url }}">Accueil</a></li>
+            <li><a href="{{ collections['homme'].url }}">Homme</a></li>
+            <li><a href="{{ collections['femme'].url }}">Femme</a></li>
+            <li><a href="{{ collections['accessoires'].url }}">Accessoires</a></li>
+            <li><a href="{{ pages['about'].url }}">À propos</a></li>
+          </ul>
         </nav>
-        
-        <div style="display: flex; align-items: center; gap: 1rem;">
-          <a href="/cart" style="color: rgba(255,255,255,0.8); text-decoration: none;">
-            Panier ({{ cart.item_count }})
-          </a>
+        <div class="nav-actions">
+          <a href="{{ routes.search_url }}">🔍</a>
+          <a href="{{ routes.account_url }}">👤</a>
+          <a href="{{ routes.cart_url }}">🛒 ({{ cart.item_count }})</a>
         </div>
       </div>
-    </header>
-
-    <!-- Announcement Bar -->
-    <div class="announcement-bar">
-      Nouvelle collection disponible • Livraison gratuite dès 100€ • Retours sous 30 jours
     </div>
+  </header>
 
-    <main id="MainContent" role="main">
-      {{ content_for_layout }}
-    </main>
+  <!-- Main Content -->
+  <main id="MainContent" class="content-for-layout" role="main" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
 
-    <!-- Footer -->
-    <footer style="background-color: rgba(11,11,11,0.8); border-top: 1px solid rgba(245,239,230,0.1); padding: 3rem 0; margin-top: 4rem; text-align: center; color: rgba(255,255,255,0.7);">
-      <div style="max-width: 1400px; margin: 0 auto; padding: 0 1.5rem;">
-        <div style="font-family: Montserrat, sans-serif; font-size: 1.5rem; font-weight: 600; color: white; margin-bottom: 2rem;">We Have Faith</div>
-        <div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap;">
-          <a href="/pages/politique-vie-privee" style="color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem;">Politique de confidentialité</a>
-          <a href="/pages/contact" style="color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem;">Contact</a>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-nav">
+          <a href="{{ pages['politique-de-confidentialite'].url }}">Politique de confidentialité</a>
+          <a href="{{ pages['mentions-legales'].url }}">Mentions légales</a>
+          <a href="{{ pages['contact'].url }}">Contact</a>
         </div>
-        <div style="color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(245,239,230,0.1);">
-          © {{ 'now' | date: "%Y" }} We Have Faith. Tous droits réservés.
-        </div>
+        <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. Tous droits réservés.</p>
+        <p style="margin-top: 1rem; opacity: 0.5; font-size: 0.8rem;">Made with Emergent</p>
       </div>
-    </footer>
-  <!-- Cache refresh: 1755299331.732421 -->
-  </body>
+    </div>
+  </footer>
+</body>
 </html>
