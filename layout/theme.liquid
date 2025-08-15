@@ -61,9 +61,9 @@
           <a href="{{ pages['contact'].url }}">Contact</a>
         </div>
         <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. Tous droits réservés.</p>
-        <p style="margin-top: 1rem; opacity: 0.5; font-size: 0.8rem;">Made with Emergent</p>
       </div>
     </div>
   </footer>
+  {{ content_for_footer }}
 </body>
 </html>
