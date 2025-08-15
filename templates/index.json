@@ -1,9 +1,40 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "main": {
+    "announcement": {
+      "type": "whf-announcement",
+      "settings": {
+        "message": "✨ Nouvelle collection disponible • Livraison gratuite dès 100€",
+        "bg_color": "#BFA05A",
+        "text_color": "#0B0B0B"
+      }
+    },
+    "hero": {
       "type": "whf-hero",
-      "settings": {}
+      "settings": {
+        "brand_text": "WE HAVE FAITH",
+        "hero_title": "Confiance.\nPersévérance.\nÉlégance.",
+        "hero_description": "Des essentiels intemporels, pensés pour durer. Une signature minimaliste aux détails précis.",
+        "btn_primary_text": "Découvrir la collection",
+        "btn_primary_url": "/collections/all",
+        "btn_secondary_text": "Notre histoire",
+        "show_badge": true,
+        "badge_text": "Nouveau",
+        "showcase_title": "WE HAVE\nFAITH",
+        "showcase_subtitle": "COLLECTION"
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "announcement",
+    "hero"
+  ]
 }

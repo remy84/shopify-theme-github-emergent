@@ -1,22 +1,45 @@
+<div class="announcement-bar">
+  <div class="container">
+    {% if section.settings.message != blank %}
+      <p>{{ section.settings.message }}</p>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  .announcement-bar {
+    background: {{ section.settings.bg_color }};
+    color: {{ section.settings.text_color }};
+    padding: 0.75rem 0;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+</style>
+
 {% schema %}
 {
-  "name": "Bandeau d'annonce WHF",
+  "name": "WE HAVE FAITH Annonce",
   "settings": [
-    { "type": "text", "id": "message_left", "label": "Message gauche", "default": "Offre de lancement" },
-    { "type": "url", "id": "link_left", "label": "Lien gauche", "default": "/products/casquette-classique" },
-    { "type": "text", "id": "message_right", "label": "Message droit", "default": "Obtiens 20% avec FAITH20" }
+    {
+      "type": "text",
+      "id": "message",
+      "label": "Message d'annonce",
+      "default": "✨ Nouvelle collection disponible • Livraison gratuite dès 100€"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Couleur fond",
+      "default": "#BFA05A"
+    },
+    {
+      "type": "color",
+      "id": "text_color", 
+      "label": "Couleur texte",
+      "default": "#0B0B0B"
+    }
   ]
 }
 {% endschema %}
-
-<div class="whf-announcement" role="region" aria-label="Annonces">
-  <div class="whf-announcement__track">
-    <span class="whf-announcement__item">{{ section.settings.message_left }} · <a href="{{ section.settings.link_left }}">commande maintenant</a></span>
-    <span class="whf-announcement__sep">•</span>
-    <span class="whf-announcement__item">{{ section.settings.message_right }}</span>
-    <span class="whf-announcement__sep">•</span>
-    <span class="whf-announcement__item">{{ section.settings.message_left }} · <a href="{{ section.settings.link_left }}">commande maintenant</a></span>
-    <span class="whf-announcement__sep">•</span>
-    <span class="whf-announcement__item">{{ section.settings.message_right }}</span>
-  </div>
-</div>
