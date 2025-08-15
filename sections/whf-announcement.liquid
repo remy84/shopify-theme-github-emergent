@@ -1,0 +1,22 @@
+{% schema %}
+{
+  "name": "Bandeau d'annonce WHF",
+  "settings": [
+    { "type": "text", "id": "message_left", "label": "Message gauche", "default": "Offre de lancement" },
+    { "type": "url", "id": "link_left", "label": "Lien gauche", "default": "/products/casquette-classique" },
+    { "type": "text", "id": "message_right", "label": "Message droit", "default": "Obtiens 20% avec FAITH20" }
+  ]
+}
+{% endschema %}
+
+<div class="whf-announcement" role="region" aria-label="Annonces">
+  <div class="whf-announcement__track">
+    <span class="whf-announcement__item">{{ section.settings.message_left }} · <a href="{{ section.settings.link_left }}">commande maintenant</a></span>
+    <span class="whf-announcement__sep">•</span>
+    <span class="whf-announcement__item">{{ section.settings.message_right }}</span>
+    <span class="whf-announcement__sep">•</span>
+    <span class="whf-announcement__item">{{ section.settings.message_left }} · <a href="{{ section.settings.link_left }}">commande maintenant</a></span>
+    <span class="whf-announcement__sep">•</span>
+    <span class="whf-announcement__item">{{ section.settings.message_right }}</span>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  {{ content_for_header }}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page_title }} - {{ shop.name }}</title>
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+</head>
+<body class="whf-theme">
+  {% section 'whf-announcement' %}
+  <header class="whf-header" role="banner">
+    <a href="{{ routes.root_url }}" class="whf-logo">{{ shop.name }}</a>
+  </header>
+  <main role="main">
+    {{ content_for_layout }}
+  </main>
+  <footer class="whf-footer" role="contentinfo">
+    <small>© {{ 'now' | date: '%Y' }} {{ shop.name }}. Tous droits réservés.</small>
+  </footer>
+  {{ content_for_footer }}
+</body>
+</html>

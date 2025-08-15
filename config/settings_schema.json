@@ -1,0 +1,8 @@
+[
+  {
+    "name": "We Have Faith",
+    "settings": [
+      {"type":"text","id":"brand_tagline","label":"Slogan","default":"Confiance. Persévérance. Élégance."}
+    ]
+  }
+]

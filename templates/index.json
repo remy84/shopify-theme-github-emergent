@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "whf-hero",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}
