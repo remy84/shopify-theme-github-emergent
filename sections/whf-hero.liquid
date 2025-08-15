@@ -3,7 +3,7 @@
     <div class="hero-content">
       <div class="hero-text">
         <div class="hero-brand">{{ section.settings.brand_text }}</div>
-        <h1 class="hero-title">{{ section.settings.hero_title }}</h1>
+        <h1 class="hero-title">{{ section.settings.hero_title | newline_to_br }}</h1>
         <p class="hero-description">{{ section.settings.hero_description }}</p>
         <div class="hero-buttons">
           {% if section.settings.btn_primary_text != blank %}
@@ -12,7 +12,7 @@
             </a>
           {% endif %}
           {% if section.settings.btn_secondary_text != blank %}
-            <button class="btn btn-secondary" onclick="openStoryModal()">
+            <button class="btn btn-secondary">
               {{ section.settings.btn_secondary_text }}
             </button>
           {% endif %}
@@ -25,7 +25,7 @@
         {% endif %}
         <div class="product-showcase">
           <div class="product-showcase-content">
-            <h3>{{ section.settings.showcase_title }}</h3>
+            <h3>{{ section.settings.showcase_title | newline_to_br }}</h3>
             <p>{{ section.settings.showcase_subtitle }}</p>
           </div>
         </div>
@@ -33,30 +33,6 @@
     </div>
   </div>
 </section>
-
-<style>
-  .hero { padding: 6rem 0 4rem; min-height: 80vh; display: flex; align-items: center; }
-  .hero-content { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; width: 100%; }
-  .hero-text { max-width: 600px; }
-  .hero-brand { font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-bottom: 2rem; letter-spacing: 3px; font-weight: 500; text-transform: uppercase; }
-  .hero-title { font-size: 4.5rem; font-weight: 800; line-height: 1.05; margin-bottom: 2rem; letter-spacing: -0.02em; }
-  .hero-description { font-size: 1.125rem; color: rgba(255,255,255,0.8); margin-bottom: 3rem; line-height: 1.7; font-weight: 400; }
-  .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .btn { display: inline-block; padding: 1rem 2rem; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.3s; border: none; cursor: pointer; font-size: 0.95rem; }
-  .btn-primary { background: #BFA05A; color: #0B0B0B; }
-  .btn-primary:hover { background: #a68a4a; transform: translateY(-1px); }
-  .btn-secondary { background: transparent; color: #ffffff; border: 1px solid rgba(255,255,255,0.3); }
-  .btn-secondary:hover { border-color: #BFA05A; color: #BFA05A; background: rgba(191, 160, 90, 0.1); }
-  .hero-image { position: relative; display: flex; justify-content: center; align-items: center; }
-  .product-showcase { width: 450px; height: 450px; background: linear-gradient(135deg, #BFA05A 0%, #8b7c4a 100%); border-radius: 24px; position: relative; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.3); overflow: hidden; }
-  .product-showcase::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 50%); }
-  .product-showcase-content { color: #0B0B0B; text-align: center; z-index: 2; }
-  .product-showcase h3 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
-  .product-showcase p { font-size: 1rem; opacity: 0.8; font-weight: 500; letter-spacing: 1px; }
-  .new-badge { position: absolute; top: -12px; right: 30px; background: #ef4444; color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3); }
-  .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
-  @media (max-width: 768px) { .hero-title { font-size: 2.5rem; } .hero-content { grid-template-columns: 1fr; text-align: center; gap: 3rem; } .product-showcase { width: 300px; height: 300px; } }
-</style>
 
 {% schema %}
 {
