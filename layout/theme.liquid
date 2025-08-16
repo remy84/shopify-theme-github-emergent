@@ -45,19 +45,16 @@
   <body class="template-{{ template.name }}">
     <!-- Header -->
        <header class="site-header">
-<div class="flex items-center gap-3"><a class="inline-flex items-center gap-2" href="/" data-discover="true"><img alt="Logo We Have Faith" class="h-6 w-6 object-contain" src="https://customer-assets.emergentagent.com/job_wehave-faith/artifacts/2mrqhg65_LOGO%20WHF%20BLANC.png"><span class="text-white font-semibold tracking-[0.08em] uppercase text-sm">We Have Faith</span></a></div>
+<div class="flex items-center gap-3"><a class="inline-flex items-center gap-2" href="/" data-discover="true">
+  <img alt="Logo We Have Faith" class="h-6 w-6 object-contain" src="https://customer-assets.emergentagent.com/job_wehave-faith/artifacts/2mrqhg65_LOGO%20WHF%20BLANC.png"
+    <span class="text-white font-semibold tracking-[0.08em] uppercase text-sm"> We Have Faith </span>
+  </a>
+</div>
         <a href="{{ routes.root_url }}" style="font-family: Montserrat, sans-serif; font-size: 1.5rem; font-weight: 600; color: white; text-decoration: none;">
           We Have Faith
         </a>
         
         <nav style="display: flex; align-items: center; gap: 2rem;">
-          <a href="{{ routes.root_url }}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">Accueil</a>
-          {% assign homme = collections['homme'] | default: collections['Homme'] %}
-          {% assign femme = collections['femme'] | default: collections['Femme'] %}
-          {% assign enfant = collections['enfant'] | default: collections['Enfant'] %}
-          <a href="{{ homme.url | default: '/collections/homme' }}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">Homme</a>
-          <a href="{{ femme.url | default: '/collections/femme' }}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">Femme</a>
-          <a href="{{ enfant.url | default: '/collections/enfant' }}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">Enfant</a>
         </nav>
         
         <div style="display: flex; align-items: center; gap: 1rem;">
