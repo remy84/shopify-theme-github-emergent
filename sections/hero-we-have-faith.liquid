@@ -1,0 +1,65 @@
+{
+  "type": "hero",
+  "name": "Hero We Have Faith",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Confiance. Persévérance. Élégance.",
+      "label": "Titre principal"
+    },
+    {
+      "type": "textarea",
+      "id": "description", 
+      "default": "Des essentiels intemporels, pensés pour durer. Une signature minimaliste aux détails précis.",
+      "label": "Description"
+    }
+  ]
+}
+
+{% comment %}
+Schema ci-dessus, code Liquid ci-dessous
+{% endcomment %}
+
+<div class="hero-section" style="position: relative; min-height: 70vh; display: flex; align-items: center; background: linear-gradient(135deg, #0B0B0B 0%, #1a1a1a 60%, #2a2a2a 100%); overflow: hidden;">
+  
+  <!-- Background effects -->
+  <div style="position: absolute; inset: 0; background: radial-gradient(80% 60% at 50% 0%, rgba(191,160,90,0.08), transparent 60%); pointer-events: none;"></div>
+  
+  <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+    
+    <!-- Section texte à gauche -->
+    <div style="backdrop-filter: blur(18px); background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 3rem 2.5rem;">
+      <p style="color: rgba(255,255,255,0.7); font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem;">We Have Faith</p>
+      
+      <h1 style="font-family: Montserrat, sans-serif; font-size: 3.2rem; font-weight: 600; line-height: 1.05; color: white; margin-bottom: 1.5rem; letter-spacing: -0.02em;">
+        {{ section.settings.heading | default: "Confiance.<br>Persévérance.<br><span style='color: #BFA05A;'>Élégance.</span>" }}
+      </h1>
+      
+      <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem; max-width: 500px;">
+        {{ section.settings.description | default: "Des essentiels intemporels, pensés pour durer. Une signature minimaliste aux détails précis." }}
+      </p>
+      
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="/collections/all" style="display: inline-block; background-color: #BFA05A; color: #0B0B0B; padding: 0.75rem 1.5rem; font-size: 1rem; font-weight: 600; text-decoration: none; border-radius: 6px; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(191,160,90,0.3);">
+          Découvrir la collection
+        </a>
+        <a href="/pages/about" style="display: inline-block; background: transparent; color: rgba(255,255,255,0.9); border: 1px solid rgba(255,255,255,0.3); padding: 0.75rem 1.5rem; font-size: 1rem; font-weight: 500; text-decoration: none; border-radius: 6px; transition: all 0.3s ease;">
+          Notre histoire
+        </a>
+      </div>
+    </div>
+    
+    <!-- Image à droite -->
+    <div style="position: relative; height: 400px; display: flex; align-items: center; justify-content: center;">
+      <div style="position: relative; z-index: 2;">
+        <div style="width: 300px; height: 300px; background: linear-gradient(135deg, #BFA05A 0%, #d4b366 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+          <span style="color: #0B0B0B; font-size: 2rem; font-weight: 700; font-family: Montserrat;">WE HAVE FAITH</span>
+        </div>
+      </div>
+      <div style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.9); color: #0B0B0B; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; z-index: 3;">
+        Nouveau
+      </div>
+    </div>
+  </div>
+</div>

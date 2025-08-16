@@ -1,0 +1,127 @@
+<!-- We Have Faith Cart Page -->
+
+<div style="background-color: #0B0B0B; color: white; min-height: 100vh; padding: 2rem 0;">
+  <div style="max-width: 1000px; margin: 0 auto; padding: 0 1.5rem;">
+    
+    <h1 style="font-family: Montserrat, sans-serif; font-size: 2.5rem; font-weight: 600; color: white; text-align: center; margin-bottom: 3rem;">
+      Votre Panier
+    </h1>
+
+    {% if cart.item_count > 0 %}
+      <form action="{{ routes.cart_url }}" method="post" novalidate>
+        
+        <!-- Articles du panier -->
+        <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden; margin-bottom: 2rem;">
+          {% for item in cart.items %}
+            <div style="display: grid; grid-template-columns: 100px 1fr auto; gap: 1.5rem; padding: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+              
+              <!-- Image produit -->
+              <div style="aspect-ratio: 1; overflow: hidden; border-radius: 8px; background-color: #F5EFE6;">
+                {% if item.image %}
+                  <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.product.title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                {% endif %}
+              </div>
+
+              <!-- Détails produit -->
+              <div>
+                <h3 style="font-size: 1.2rem; font-weight: 600; color: white; margin-bottom: 0.5rem;">
+                  <a href="{{ item.product.url }}" style="color: white; text-decoration: none;">{{ item.product.title }}</a>
+                </h3>
+                {% unless item.product.has_only_default_variant %}
+                  <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-bottom: 0.5rem;">
+                    {{ item.variant.title }}
+                  </p>
+                {% endunless %}
+                <p style="color: #BFA05A; font-size: 1.1rem; font-weight: 600;">
+                  {{ item.price | money }}
+                </p>
+              </div>
+
+              <!-- Quantité et actions -->
+              <div style="text-align: right;">
+                <div style="display: flex; align-items: center; justify-content: flex-end; gap: 0.5rem; margin-bottom: 1rem;">
+                  <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" 
+                         style="width: 80px; padding: 0.5rem; background-color: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; color: white; text-align: center;">
+                </div>
+                
+                <div style="color: #BFA05A; font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem;">
+                  {{ item.line_price | money }}
+                </div>
+                
+                <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0" 
+                   style="color: #ef4444; text-decoration: none; font-size: 0.9rem;">
+                  Supprimer
+                </a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <!-- Récapitulatif -->
+        <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 2rem; margin-bottom: 2rem;">
+          <h2 style="font-size: 1.5rem; font-weight: 600; color: white; margin-bottom: 1.5rem;">
+            Récapitulatif
+          </h2>
+          
+          <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+            <span style="color: rgba(255,255,255,0.8);">Sous-total ({{ cart.item_count }} {% if cart.item_count == 1 %}article{% else %}articles{% endif %})</span>
+            <span style="color: white; font-weight: 600;">{{ cart.total_price | money }}</span>
+          </div>
+          
+          <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+            <span style="color: rgba(255,255,255,0.8);">Livraison</span>
+            <span style="color: white;">
+              {% if cart.total_price >= 10000 %}
+                Gratuite
+              {% else %}
+                Calculée à l'étape suivante
+              {% endif %}
+            </span>
+          </div>
+          
+          <div style="display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 600;">
+            <span style="color: white;">Total</span>
+            <span style="color: #BFA05A;">{{ cart.total_price | money }}</span>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div style="display: flex; gap: 1rem; justify-content: space-between;">
+          <button type="submit" name="update" 
+                  style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 1rem 2rem; border-radius: 6px; cursor: pointer; font-size: 1rem;">
+            Mettre à jour le panier
+          </button>
+          
+          <div style="display: flex; gap: 1rem;">
+            <a href="{{ routes.all_products_collection_url }}" 
+               style="display: inline-block; background: transparent; border: 2px solid #BFA05A; color: #BFA05A; padding: 1rem 2rem; text-decoration: none; border-radius: 6px; font-weight: 600;">
+              Continuer mes achats
+            </a>
+            
+            <button type="submit" name="add" formaction="{{ routes.cart_url }}" 
+                    style="background-color: #BFA05A; color: #0B0B0B; border: none; padding: 1rem 2rem; border-radius: 6px; cursor: pointer; font-size: 1rem; font-weight: 600;">
+              Finaliser la commande
+            </button>
+          </div>
+        </div>
+      </form>
+
+    {% else %}
+      <!-- Panier vide -->
+      <div style="text-align: center; padding: 4rem 2rem;">
+        <div style="font-size: 4rem; margin-bottom: 2rem;">🛒</div>
+        <h2 style="font-size: 1.8rem; font-weight: 600; color: white; margin-bottom: 1rem;">
+          Votre panier est vide
+        </h2>
+        <p style="color: rgba(255,255,255,0.7); margin-bottom: 3rem; font-size: 1.1rem;">
+          Découvrez nos collections et ajoutez vos articles préférés.
+        </p>
+        <a href="{{ routes.all_products_collection_url }}" 
+           style="display: inline-block; background-color: #BFA05A; color: #0B0B0B; padding: 1rem 2rem; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 1.1rem;">
+          Découvrir nos produits
+        </a>
+      </div>
+    {% endif %}
+
+  </div>
+</div>

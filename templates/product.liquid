@@ -1,24 +1,159 @@
-<div class="container">
-  <div class="product-detail">
-    <div class="product-gallery">
-      {% for image in product.images %}
-        <img src="{{ image | img_url: '600x600' }}" alt="{{ product.title }}" class="product-image">
-      {% endfor %}
-    </div>
+<!-- We Have Faith Product Page -->
+
+<div style="background-color: #0B0B0B; color: white; min-height: 100vh; padding: 2rem 0;">
+  <div style="max-width: 1400px; margin: 0 auto; padding: 0 1.5rem;">
     
-    <div class="product-info">
-      <h1 class="product-title">{{ product.title }}</h1>
-      <div class="product-price">{{ product.price | money }}</div>
-      <div class="product-description">{{ product.description }}</div>
+    <!-- Breadcrumb -->
+    <nav style="margin-bottom: 2rem;">
+      <a href="{{ routes.root_url }}" style="color: rgba(255,255,255,0.6); text-decoration: none;">Accueil</a>
+      <span style="color: rgba(255,255,255,0.4); margin: 0 0.5rem;">/</span>
+      <a href="{{ collections.all.url }}" style="color: rgba(255,255,255,0.6); text-decoration: none;">Boutique</a>
+      <span style="color: rgba(255,255,255,0.4); margin: 0 0.5rem;">/</span>
+      <span style="color: #BFA05A;">{{ product.title }}</span>
+    </nav>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;">
       
-      <form action="/cart/add" method="post" enctype="multipart/form-data">
-        <select name="id">
-          {% for variant in product.variants %}
-            <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+      <!-- Images produit -->
+      <div>
+        {% if product.featured_image %}
+          <div style="aspect-ratio: 4/5; overflow: hidden; border-radius: 12px; margin-bottom: 1rem;">
+            <img src="{{ product.featured_image | image_url: width: 800 }}" 
+                 alt="{{ product.title }}" 
+                 style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+        {% endif %}
+        
+        <!-- Images supplémentaires -->
+        {% if product.images.size > 1 %}
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem;">
+          {% for image in product.images limit: 4 %}
+            <img src="{{ image | image_url: width: 200 }}" 
+                 alt="{{ product.title }}"
+                 style="width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 6px; cursor: pointer;">
           {% endfor %}
-        </select>
-        <button type="submit" class="btn btn-primary">Ajouter au panier</button>
-      </form>
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Informations produit -->
+      <div>
+        <h1 style="font-family: Montserrat, sans-serif; font-size: 2.5rem; font-weight: 600; color: white; margin-bottom: 1rem;">
+          {{ product.title }}
+        </h1>
+        
+        <div style="margin-bottom: 2rem;">
+          <span style="font-size: 2rem; font-weight: 700; color: #BFA05A;">
+            {{ product.price | money }}
+          </span>
+          {% if product.compare_at_price > product.price %}
+            <span style="font-size: 1.2rem; color: rgba(255,255,255,0.5); text-decoration: line-through; margin-left: 0.5rem;">
+              {{ product.compare_at_price | money }}
+            </span>
+          {% endif %}
+        </div>
+
+        {% if product.description %}
+        <div style="color: rgba(255,255,255,0.8); line-height: 1.6; margin-bottom: 2rem; font-size: 1.1rem;">
+          {{ product.description }}
+        </div>
+        {% endif %}
+
+        <!-- Formulaire d'ajout au panier -->
+        <form action="/cart/add" method="post" enctype="multipart/form-data">
+          
+          <!-- Variantes -->
+          {% unless product.has_only_default_variant %}
+            {% for option in product.options_with_values %}
+              <div style="margin-bottom: 1.5rem;">
+                <label style="display: block; color: white; font-weight: 600; margin-bottom: 0.5rem;">
+                  {{ option.name }}
+                </label>
+                <select name="id" style="width: 100%; padding: 0.75rem; background-color: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; color: white; font-size: 1rem;">
+                  {% for variant in product.variants %}
+                    <option value="{{ variant.id }}" {% if variant.available %}{% else %}disabled{% endif %}>
+                      {{ variant.title }} - {{ variant.price | money }}
+                      {% unless variant.available %} (Épuisé){% endunless %}
+                    </option>
+                  {% endfor %}
+                </select>
+              </div>
+            {% endfor %}
+          {% else %}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          {% endunless %}
+
+          <!-- Quantité -->
+          <div style="margin-bottom: 2rem;">
+            <label style="display: block; color: white; font-weight: 600; margin-bottom: 0.5rem;">
+              Quantité
+            </label>
+            <input type="number" name="quantity" value="1" min="1" 
+                   style="width: 100px; padding: 0.75rem; background-color: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; color: white; font-size: 1rem;">
+          </div>
+
+          <!-- Bouton d'ajout au panier -->
+          <button type="submit" 
+                  style="width: 100%; background-color: #BFA05A; color: #0B0B0B; border: none; padding: 1rem 2rem; font-size: 1.1rem; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; margin-bottom: 1rem;"
+                  onmouseover="this.style.backgroundColor='#d4b366'"
+                  onmouseout="this.style.backgroundColor='#BFA05A'">
+            {% if product.available %}
+              Ajouter au panier - {{ product.price | money }}
+            {% else %}
+              Épuisé
+            {% endif %}
+          </button>
+        </form>
+
+        <!-- Informations supplémentaires -->
+        <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 1.5rem; margin-top: 2rem;">
+          <h3 style="color: white; font-weight: 600; margin-bottom: 1rem;">Informations</h3>
+          <ul style="color: rgba(255,255,255,0.8); line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+            <li>Livraison gratuite dès 100€</li>
+            <li>Retours sous 30 jours</li>
+            <li>Paiement sécurisé</li>
+            <li>Service client 7j/7</li>
+          </ul>
+        </div>
+
+      </div>
     </div>
+
+    <!-- Produits suggérés -->
+    {% if product.type %}
+    <div style="margin-top: 4rem; padding-top: 4rem; border-top: 1px solid rgba(255,255,255,0.1);">
+      <h2 style="font-family: Montserrat, sans-serif; font-size: 2rem; font-weight: 600; color: white; text-align: center; margin-bottom: 3rem;">
+        Vous pourriez aussi aimer
+      </h2>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+        {% assign related_products = collections[product.type].products | where: 'id', product.id | limit: 4 %}
+        {% for related_product in related_products %}
+          <a href="{{ related_product.url }}" style="text-decoration: none; display: block; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden; transition: all 0.4s ease;"
+             onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 12px 24px rgba(0,0,0,0.35)'"
+             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+            
+            <div style="width: 100%; aspect-ratio: 4/5; background-color: #F5EFE6;">
+              {% if related_product.featured_image %}
+                <img src="{{ related_product.featured_image | image_url: width: 400 }}" 
+                     alt="{{ related_product.title }}" 
+                     style="width: 100%; height: 100%; object-fit: cover;">
+              {% endif %}
+            </div>
+            
+            <div style="padding: 1.5rem;">
+              <h3 style="font-size: 1.2rem; font-weight: 600; color: white; margin-bottom: 0.5rem;">
+                {{ related_product.title }}
+              </h3>
+              <p style="color: #BFA05A; font-size: 1.1rem; font-weight: 600;">
+                {{ related_product.price | money }}
+              </p>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
   </div>
 </div>

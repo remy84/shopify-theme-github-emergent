@@ -1,22 +1,152 @@
-<div class="container">
-  <div class="collection-header">
-    <h1>{{ collection.title }}</h1>
-    <p>{{ collection.description }}</p>
-  </div>
-  
-  <div class="products-grid">
-    {% for product in collection.products %}
-      <div class="product-card">
-        <a href="{{ product.url }}">
-          {% if product.featured_image %}
-            <img src="{{ product.featured_image | img_url: '400x400' }}" alt="{{ product.title }}" class="product-image">
-          {% endif %}
-          <div class="product-info">
-            <h3 class="product-title">{{ product.title }}</h3>
-            <div class="product-price">{{ product.price | money }}</div>
+<!-- We Have Faith Collection Page -->
+
+<div style="background-color: #0B0B0B; color: white; min-height: 100vh; padding: 2rem 0;">
+  <div style="max-width: 1400px; margin: 0 auto; padding: 0 1.5rem;">
+    
+    <!-- Breadcrumb -->
+    <nav style="margin-bottom: 2rem;">
+      <a href="{{ routes.root_url }}" style="color: rgba(255,255,255,0.6); text-decoration: none;">Accueil</a>
+      <span style="color: rgba(255,255,255,0.4); margin: 0 0.5rem;">/</span>
+      <span style="color: #BFA05A;">{{ collection.title }}</span>
+    </nav>
+
+    <!-- Header de collection -->
+    <div style="text-align: center; margin-bottom: 4rem;">
+      <h1 style="font-family: Montserrat, sans-serif; font-size: 3rem; font-weight: 600; color: white; margin-bottom: 1rem;">
+        {{ collection.title }}
+      </h1>
+      {% if collection.description %}
+      <p style="color: rgba(255,255,255,0.8); font-size: 1.2rem; max-width: 600px; margin: 0 auto; line-height: 1.6;">
+        {{ collection.description }}
+      </p>
+      {% endif %}
+      
+      <div style="margin-top: 2rem;">
+        <span style="color: rgba(255,255,255,0.6);">
+          {{ collection.products_count }} 
+          {% if collection.products_count == 1 %}produit{% else %}produits{% endif %}
+        </span>
+      </div>
+    </div>
+
+    <!-- Filtres et Tri -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+      <div>
+        <span style="color: rgba(255,255,255,0.8); margin-right: 1rem;">Filtrer par :</span>
+        <select style="background-color: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; color: white; padding: 0.5rem;">
+          <option>Tous les produits</option>
+          <option>Prix croissant</option>
+          <option>Prix décroissant</option>
+          <option>Nouveautés</option>
+        </select>
+      </div>
+      
+      <div style="color: rgba(255,255,255,0.6);">
+        Affichage {{ collection.products.size }} sur {{ collection.products_count }}
+      </div>
+    </div>
+
+    <!-- Grille de produits -->
+    {% if collection.products.size > 0 %}
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+      {% for product in collection.products %}
+        <a href="{{ product.url }}" style="text-decoration: none; display: block; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden; transition: all 0.4s ease;"
+           onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 12px 24px rgba(0,0,0,0.35)'"
+           onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+          
+          <div style="width: 100%; aspect-ratio: 4/5; background-color: #F5EFE6; position: relative;">
+            {% if product.featured_image %}
+              <img src="{{ product.featured_image | image_url: width: 400 }}" 
+                   alt="{{ product.title }}" 
+                   style="width: 100%; height: 100%; object-fit: cover;">
+            {% else %}
+              <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #0B0B0B; font-size: 1.5rem; font-weight: 700;">
+                {{ product.title | truncate: 15 }}
+              </div>
+            {% endif %}
+            
+            <!-- Badge prix -->
+            <div style="position: absolute; top: 15px; right: 15px; background: rgba(11,11,11,0.8); color: #BFA05A; padding: 0.5rem 0.75rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">
+              {{ product.price | money }}
+            </div>
+            
+            {% unless product.available %}
+            <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center;">
+              <span style="background: #ef4444; color: white; padding: 0.5rem 1rem; border-radius: 4px; font-weight: 600;">
+                Épuisé
+              </span>
+            </div>
+            {% endunless %}
+          </div>
+          
+          <div style="padding: 1.5rem;">
+            <h3 style="font-size: 1.2rem; font-weight: 600; color: white; margin-bottom: 0.5rem;">
+              {{ product.title }}
+            </h3>
+            {% if product.description %}
+            <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem; line-height: 1.4; margin-bottom: 1rem;">
+              {{ product.description | strip_html | truncate: 80 }}
+            </p>
+            {% endif %}
+            
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <span style="color: #BFA05A; font-size: 1.1rem; font-weight: 600;">
+                  {{ product.price | money }}
+                </span>
+                {% if product.compare_at_price > product.price %}
+                  <span style="color: rgba(255,255,255,0.5); text-decoration: line-through; font-size: 0.9rem; margin-left: 0.5rem;">
+                    {{ product.compare_at_price | money }}
+                  </span>
+                {% endif %}
+              </div>
+              
+              <div style="background-color: #BFA05A; color: #0B0B0B; padding: 0.5rem 1rem; font-size: 0.9rem; font-weight: 600; border-radius: 6px;">
+                Voir
+              </div>
+            </div>
           </div>
         </a>
-      </div>
-    {% endfor %}
+      {% endfor %}
+    </div>
+    {% else %}
+    <div style="text-align: center; padding: 4rem 2rem; color: rgba(255,255,255,0.7);">
+      <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">Aucun produit dans cette collection</h2>
+      <p style="margin-bottom: 2rem;">Cette collection est actuellement vide.</p>
+      <a href="{{ routes.all_products_collection_url }}" style="display: inline-block; background-color: #BFA05A; color: #0B0B0B; padding: 1rem 2rem; text-decoration: none; border-radius: 6px; font-weight: 600;">
+        Voir tous les produits
+      </a>
+    </div>
+    {% endif %}
+
+    <!-- Pagination -->
+    {% if paginate.pages > 1 %}
+    <div style="text-align: center; margin-top: 3rem;">
+      {% if paginate.previous %}
+        <a href="{{ paginate.previous.url }}" style="display: inline-block; background: rgba(255,255,255,0.1); color: white; padding: 0.75rem 1.5rem; margin: 0 0.5rem; text-decoration: none; border-radius: 6px;">
+          ← Précédent
+        </a>
+      {% endif %}
+      
+      {% for part in paginate.parts %}
+        {% if part.is_link %}
+          <a href="{{ part.url }}" style="display: inline-block; background: rgba(255,255,255,0.1); color: white; padding: 0.75rem 1rem; margin: 0 0.25rem; text-decoration: none; border-radius: 4px;">
+            {{ part.title }}
+          </a>
+        {% else %}
+          <span style="display: inline-block; background: #BFA05A; color: #0B0B0B; padding: 0.75rem 1rem; margin: 0 0.25rem; border-radius: 4px; font-weight: 600;">
+            {{ part.title }}
+          </span>
+        {% endif %}
+      {% endfor %}
+      
+      {% if paginate.next %}
+        <a href="{{ paginate.next.url }}" style="display: inline-block; background: rgba(255,255,255,0.1); color: white; padding: 0.75rem 1.5rem; margin: 0 0.5rem; text-decoration: none; border-radius: 6px;">
+          Suivant →
+        </a>
+      {% endif %}
+    </div>
+    {% endif %}
+
   </div>
 </div>
