@@ -44,8 +44,30 @@
 
   <body class="template-{{ template.name }}">
     <!-- Header -->
+       <header class="site-header">
+      <div style="max-width: 1400px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 70px;">
+        <a href="{{ routes.root_url }}" style="font-family: Montserrat, sans-serif; font-size: 1.5rem; font-weight: 600; color: white; text-decoration: none;">
+          We Have Faith
+        </a>
+        
+        <nav style="display: flex; align-items: center; gap: 2rem;">
+          <a href="{{ routes.root_url }}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">Accueil</a>
+          {% assign homme = collections['homme'] | default: collections['Homme'] %}
+          {% assign femme = collections['femme'] | default: collections['Femme'] %}
+          {% assign enfant = collections['enfant'] | default: collections['Enfant'] %}
+          <a href="{{ homme.url | default: '/collections/homme' }}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">Homme</a>
+          <a href="{{ femme.url | default: '/collections/femme' }}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">Femme</a>
+          <a href="{{ enfant.url | default: '/collections/enfant' }}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">Enfant</a>
+        </nav>
+        
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <a href="/cart" style="color: rgba(255,255,255,0.8); text-decoration: none;">
+            Panier ({{ cart.item_count }})
+          </a>
+        </div>
+      </div>
+    </header>
   
-
     <!-- Announcement Bar -->
     <div class="announcement-bar">
       Nouvelle collection disponible • Livraison gratuite dès 100€ • Retours sous 30 jours
