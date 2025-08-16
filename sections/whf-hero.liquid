@@ -3,7 +3,7 @@
     <div class="hero-content">
       <div class="hero-text">
         <div class="hero-brand">{{ section.settings.brand_text }}</div>
-        <h1 class="hero-title">{{ section.settings.hero_title | newline_to_br }}</h1>
+        <h1 class="hero-title">{{ section.settings.hero_title }}</h1>
         <p class="hero-description">{{ section.settings.hero_description }}</p>
         <div class="hero-buttons">
           {% if section.settings.btn_primary_text != blank %}
@@ -25,7 +25,7 @@
         {% endif %}
         <div class="product-showcase">
           <div class="product-showcase-content">
-            <h3>{{ section.settings.showcase_title | newline_to_br }}</h3>
+            <h3>{{ section.settings.showcase_title }}</h3>
             <p>{{ section.settings.showcase_subtitle }}</p>
           </div>
         </div>
