@@ -1,175 +1,32 @@
-<!-- We Have Faith Homepage - Style Emergent -->
+<div class="container">
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Confiance. Persévérance. Élégance.</h1>
+    <p>Des essentiels intemporels, pensés pour durer. Une signature minimaliste aux détails précis.</p>
+    <a href="/collections/all" class="btn">Découvrir la collection</a>
+  </section>
 
-<!-- Hero Section avec design authentique -->
-<div class="hero-section" style="position: relative; min-height: 70vh; display: flex; align-items: center; background: linear-gradient(135deg, #0B0B0B 0%, #1a1a1a 60%, #2a2a2a 100%); overflow: hidden;">
-  
-  <!-- Background effects -->
-  <div style="position: absolute; inset: 0; background: radial-gradient(80% 60% at 50% 0%, rgba(191,160,90,0.08), transparent 60%); pointer-events: none;"></div>
-  
-  <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
-    
-    <!-- Section texte à gauche -->
-    <div style="backdrop-filter: blur(18px); background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 3rem 2.5rem;">
-      <p style="color: rgba(255,255,255,0.7); font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem;">We Have Faith</p>
-      
-      <h1 style="font-family: Montserrat, sans-serif; font-size: 3.2rem; font-weight: 600; line-height: 1.05; color: white; margin-bottom: 1.5rem; letter-spacing: -0.02em;">
-        Confiance.<br>
-        Persévérance.<br>
-        <span style="color: #BFA05A;">Élégance.</span>
-      </h1>
-      
-      <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem; max-width: 500px;">
-        Des essentiels intemporels, pensés pour durer. Une signature minimaliste aux détails précis.
-      </p>
-      
-      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-        <a href="/collections/all" style="display: inline-block; background-color: #BFA05A; color: #0B0B0B; padding: 0.75rem 1.5rem; font-size: 1rem; font-weight: 600; text-decoration: none; border-radius: 6px; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(191,160,90,0.3);">
-          Découvrir la collection
-        </a>
-        <a href="/pages/about" style="display: inline-block; background: transparent; color: rgba(255,255,255,0.9); border: 1px solid rgba(255,255,255,0.3); padding: 0.75rem 1.5rem; font-size: 1rem; font-weight: 500; text-decoration: none; border-radius: 6px; transition: all 0.3s ease;">
-          Notre histoire
-        </a>
-      </div>
-    </div>
-    
-    <!-- Image à droite -->
-    <div style="position: relative; height: 400px; display: flex; align-items: center; justify-content: center;">
-      <div style="position: relative; z-index: 2;">
-        <!-- Remplacer par une vraie image produit si disponible -->
-        <div style="width: 300px; height: 300px; background: linear-gradient(135deg, #BFA05A 0%, #d4b366 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
-          <span style="color: #0B0B0B; font-size: 2rem; font-weight: 700; font-family: Montserrat;">WE HAVE FAITH</span>
-        </div>
-      </div>
-      <!-- Badge "Nouveau" -->
-      <div style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.9); color: #0B0B0B; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; z-index: 3;">
-        Nouveau
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Barre de notifications défilante -->
-<div style="background-color: #BFA05A; color: #0B0B0B; padding: 0.75rem 0; font-weight: 500; font-size: 0.9rem; overflow: hidden; white-space: nowrap;">
-  <div style="display: inline-block; animation: marquee 25s linear infinite;">
-    <span style="margin-right: 8rem;">✨ OFFRE DE LANCEMENT - Commande maintenant</span>
-    <span style="margin-right: 8rem;">🚚 Livraison gratuite dès 100€</span>
-    <span style="margin-right: 8rem;">↩️ Retours sous 30 jours</span>
-    <span style="margin-right: 8rem;">✨ OFFRE DE LANCEMENT - Commande maintenant</span>
-    <span style="margin-right: 8rem;">🚚 Livraison gratuite dès 100€</span>
-    <span style="margin-right: 8rem;">↩️ Retours sous 30 jours</span>
-  </div>
-</div>
-
-<!-- Section des produits phares -->
-<section style="padding: 4rem 0; max-width: 1400px; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem;">
-  <div style="text-align: center; margin-bottom: 3rem;">
-    <h2 style="font-family: Montserrat, sans-serif; font-size: 2.5rem; font-weight: 600; color: white; margin-bottom: 1rem;">
-      Nos produits phares
-    </h2>
-    <p style="color: rgba(255,255,255,0.7); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
-      Une sélection de nos pièces les plus appréciées, conçues pour durer et transcender les tendances.
-    </p>
-  </div>
-  
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
-    {% for product in collections.all.products limit: 8 %}
-    <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden; transition: all 0.4s ease; cursor: pointer;" 
-         onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 12px 24px rgba(0,0,0,0.35)'"
-         onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-      
-      <div style="width: 100%; aspect-ratio: 4/5; background-color: #F5EFE6; display: flex; align-items: center; justify-content: center; position: relative;">
-        {% if product.featured_image %}
-          <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title }}" style="width: 100%; height: 100%; object-fit: cover;">
-        {% else %}
-          <div style="color: #0B0B0B; font-size: 1.5rem; font-weight: 700; text-align: center;">
-            {{ product.title | truncate: 15 }}
+  <!-- Products Section -->
+  <section>
+    <h2 style="text-align: center; font-size: 2rem; margin: 3rem 0 2rem;">Nos produits</h2>
+    <div class="products-grid">
+      {% for product in collections.all.products limit: 8 %}
+      <div class="product-card">
+        <a href="{{ product.url }}">
+          {% if product.featured_image %}
+            <img src="{{ product.featured_image | img_url: '400x400' }}" alt="{{ product.title }}" class="product-image">
+          {% else %}
+            <div class="product-image" style="background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;">
+              <span>{{ product.title }}</span>
+            </div>
+          {% endif %}
+          <div class="product-info">
+            <h3 class="product-title">{{ product.title }}</h3>
+            <p class="product-price">{{ product.price | money }}</p>
           </div>
-        {% endif %}
-        
-        <!-- Badge prix -->
-        <div style="position: absolute; top: 15px; right: 15px; background: rgba(11,11,11,0.8); color: #BFA05A; padding: 0.5rem 0.75rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">
-          {{ product.price | money }}
-        </div>
+        </a>
       </div>
-      
-      <div style="padding: 1.5rem;">
-        <h3 style="font-size: 1.2rem; font-weight: 600; color: white; margin-bottom: 0.5rem;">
-          {{ product.title }}
-        </h3>
-        {% if product.description %}
-        <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem; line-height: 1.4; margin-bottom: 1rem;">
-          {{ product.description | strip_html | truncate: 80 }}
-        </p>
-        {% endif %}
-        
-        <div style="display: flex; align-items: center; justify-content: space-between;">
-          <span style="color: #BFA05A; font-size: 1.1rem; font-weight: 600;">
-            {{ product.price | money }}
-          </span>
-          <a href="{{ product.url }}" style="background-color: #BFA05A; color: #0B0B0B; padding: 0.5rem 1rem; font-size: 0.9rem; font-weight: 600; text-decoration: none; border-radius: 6px; transition: all 0.3s ease;">
-            Voir le produit
-          </a>
-        </div>
-      </div>
+      {% endfor %}
     </div>
-    {% endfor %}
-  </div>
-  
-  <div style="text-align: center;">
-    <a href="/collections/all" style="display: inline-block; background: transparent; border: 2px solid #BFA05A; color: #BFA05A; padding: 1rem 2rem; font-size: 1rem; font-weight: 600; text-decoration: none; border-radius: 8px; transition: all 0.3s ease;">
-      Voir toute la collection
-    </a>
-  </div>
-</section>
-
-<!-- Section collections - Style Emergent -->
-<section style="padding: 4rem 0; background: linear-gradient(135deg, rgba(11,11,11,0.8) 0%, rgba(26,26,26,0.8) 100%);">
-  <div style="max-width: 1400px; margin: 0 auto; padding: 0 1.5rem;">
-    <div style="text-align: center; margin-bottom: 3rem;">
-      <h2 style="font-family: Montserrat, sans-serif; font-size: 2.5rem; font-weight: 600; color: white; margin-bottom: 1rem;">
-        Parcourir par catégorie
-      </h2>
-      <p style="color: rgba(255,255,255,0.7); font-size: 1.1rem;">Découvrez nos univers pensés pour chaque style de vie</p>
-    </div>
-    
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-      
-      <a href="/collections/homme" style="text-decoration: none; display: block; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden; transition: all 0.4s ease;" 
-         onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 16px 32px rgba(0,0,0,0.4)'"
-         onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-        <div style="width: 100%; aspect-ratio: 4/3; background: linear-gradient(135deg, #BFA05A 0%, #d4b366 100%); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #0B0B0B; font-weight: 700;">
-          HOMME
-        </div>
-        <div style="padding: 2rem;">
-          <h3 style="font-size: 1.4rem; font-weight: 600; color: white; margin-bottom: 0.5rem;">Collection Homme</h3>
-          <p style="color: rgba(255,255,255,0.6); line-height: 1.5;">Élégance masculine moderne</p>
-        </div>
-      </a>
-      
-      <a href="/collections/femme" style="text-decoration: none; display: block; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden; transition: all 0.4s ease;" 
-         onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 16px 32px rgba(0,0,0,0.4)'"
-         onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-        <div style="width: 100%; aspect-ratio: 4/3; background: linear-gradient(135deg, #F5EFE6 0%, #e8ddc7 100%); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #0B0B0B; font-weight: 700;">
-          FEMME
-        </div>
-        <div style="padding: 2rem;">
-          <h3 style="font-size: 1.4rem; font-weight: 600; color: white; margin-bottom: 0.5rem;">Collection Femme</h3>
-          <p style="color: rgba(255,255,255,0.6); line-height: 1.5;">Sophistication féminine intemporelle</p>
-        </div>
-      </a>
-      
-      <a href="/collections/accessoires" style="text-decoration: none; display: block; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden; transition: all 0.4s ease;" 
-         onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 16px 32px rgba(0,0,0,0.4)'"
-         onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-        <div style="width: 100%; aspect-ratio: 4/3; background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: #BFA05A; font-weight: 700;">
-          ACCESSOIRES
-        </div>
-        <div style="padding: 2rem;">
-          <h3 style="font-size: 1.4rem; font-weight: 600; color: white; margin-bottom: 0.5rem;">Accessoires</h3>
-          <p style="color: rgba(255,255,255,0.6); line-height: 1.5;">Détails précieux qui font la différence</p>
-        </div>
-      </a>
-      
-    </div>
-  </div>
-</section>
+  </section>
+</div>
